@@ -2,8 +2,8 @@ import { SelectOptionType } from "./Types/SelectOptionType";
 import LocationPoolDisplay from "./LocationPoolDisplay";
 import { Settings } from "./Settings/Settings";
 import React, { useState } from "react";
+import FileSaver from "file-saver";
 import "./PlandoGenerator.css";
-
 // location pools
 import { BossKeyLocationPool } from "./ItemLocations/BossKeyLocationPool";
 import { CompassLocationPool } from "./ItemLocations/CompassLocationPool";
@@ -86,7 +86,6 @@ function PlandoGenerator() {
     };
 
     const saveJSONFile = () => {
-        let a = document.createElement("a");
         let contents = {
             "settings": {
                 ...settings
@@ -95,11 +94,8 @@ function PlandoGenerator() {
                 ...locations
             }
         };
-        let file = new Blob([JSON.stringify(contents, null, 4)], {type: "text/plain"});
-        a.href = URL.createObjectURL(file);
-        a.download = `plando-${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(a.href);
+        let blob = new Blob([JSON.stringify(contents, null, 4)], {type: "application/json"});
+        FileSaver.saveAs(blob, `plando-${Date.now()}.json`);
     };
 
     // locations
