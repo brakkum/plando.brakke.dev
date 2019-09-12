@@ -95,7 +95,7 @@ function PlandoGenerator() {
                 ...locations
             }
         };
-        let file = new Blob([JSON.stringify(contents)], {type: "text/plain"});
+        let file = new Blob([JSON.stringify(contents, null, 4)], {type: "text/plain"});
         a.href = URL.createObjectURL(file);
         a.download = `plando-${Date.now()}.json`;
         a.click();
