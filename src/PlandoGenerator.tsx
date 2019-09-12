@@ -230,31 +230,6 @@ function PlandoGenerator() {
         songItems.push(...SongItemPool);
     }
 
-    // populate settings section
-    let settingsJsx: JSX.Element[] = [];
-    Object.keys(Settings).sort().forEach((name, i) => {
-        let settingEnabled = settings[name] !== undefined;
-        let options: JSX.Element[];
-        let arr = (Settings[name] as SelectOptionType).options !== undefined ? (Settings[name] as SelectOptionType).options : ["false", "true"];
-        options = arr.map((option: string, j: number) => {
-            return <option key={j} value={option}>
-                {option}
-            </option>
-        });
-        settingsJsx.push(<div key={i} className="setting">
-            <h5 onClick={() => toggleSettingEnabled(name)} className={(settingEnabled ? "enabled" : "disabled")}>
-                {Settings[name].display ? Settings[name].display : name}
-            </h5>
-            {settingEnabled && <div className="">
-                <div className="select is-small setting-select">
-                    <select onChange={e => updateSetting(name, e.target.value)} defaultValue={settings[name].toString()}>
-                        {options}
-                    </select>
-                </div>
-            </div>}
-        </div>);
-    });
-
     // map over location keys to check for removed locations
     let updated = false;
     let _locations = {...locations};
@@ -296,7 +271,26 @@ function PlandoGenerator() {
                 <h3 className="is-size-3">Settings</h3>
                 <h4 className="is-size-4">Click setting name to enable/disable</h4>
                 <div className="settings">
-                    {settingsJsx}
+                    {Object.keys(Settings).sort().map((name, i) => {
+                        let settingEnabled = settings[name] !== undefined;
+                        let arr = (Settings[name] as SelectOptionType).options !== undefined ? (Settings[name] as SelectOptionType).options : ["false", "true"];
+                        return <div key={i} className="setting">
+                            <h5 onClick={() => toggleSettingEnabled(name)} className={(settingEnabled ? "enabled" : "disabled")}>
+                                {Settings[name].display ? Settings[name].display : name}
+                            </h5>
+                            {settingEnabled && <div className="">
+                                <div className="select is-small setting-select">
+                                    <select onChange={e => updateSetting(name, e.target.value)} defaultValue={settings[name].toString()}>
+                                        {arr.map((option: string, j: number) => {
+                                            return <option key={j} value={option}>
+                                                {option}
+                                            </option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>}
+                        </div>;
+                    })}
                 </div>
             </div>
 
