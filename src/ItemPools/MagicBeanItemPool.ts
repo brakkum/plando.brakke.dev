@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let MagicBeanItemPool: ItemPool = [
+export let MagicBeanItemPool: ItemPoolType = [
     "Magic Bean Pack"
 ];

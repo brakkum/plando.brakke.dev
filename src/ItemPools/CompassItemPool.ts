@@ -1,6 +1,6 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let CompassItemPool: ItemPool = [
+export let CompassItemPool: ItemPoolType = [
     "Compass (Bottom of the Well)",
     "Compass (Deku Tree)",
     "Compass (Dodongos Cavern)",

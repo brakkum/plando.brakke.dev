@@ -1,5 +1,5 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let SwordLocationPool: LocationPool = [
+export let SwordLocationPool: LocationPoolType = [
     "Kokiri Sword Chest"
 ];

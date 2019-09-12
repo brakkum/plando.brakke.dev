@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let GerudoCardItemPool: ItemPool = [
+export let GerudoCardItemPool: ItemPoolType = [
     "Gerudo Membership Card"
 ];

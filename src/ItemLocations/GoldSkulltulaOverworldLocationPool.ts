@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let GoldSkulltulaOverworldLocationPool: LocationPool = [
+export let GoldSkulltulaOverworldLocationPool: LocationPoolType = [
     "GS Kokiri Know It All House",
     "GS Kokiri Bean Patch",
     "GS Kokiri House of Twins",

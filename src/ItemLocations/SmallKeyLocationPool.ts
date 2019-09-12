@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let SmallKeyLocationPool: LocationPool = [
+export let SmallKeyLocationPool: LocationPoolType = [
     "Forest Temple First Chest",
     "Forest Temple Chest Behind Lobby",
     "Forest Temple Well Chest",

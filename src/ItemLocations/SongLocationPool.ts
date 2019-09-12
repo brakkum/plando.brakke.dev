@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let SongLocationPool: LocationPool = [
+export let SongLocationPool: LocationPoolType = [
     "Song from Saria",
     "Sheik Forest Song",
     "Song from Ocarina of Time",

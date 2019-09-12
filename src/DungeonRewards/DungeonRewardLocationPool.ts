@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let DungeonRewardLocationPool: LocationPool = [
+export let DungeonRewardLocationPool: LocationPoolType = [
     "Barinade",
     "Bongo Bongo",
     "King Dodongo",

@@ -1,29 +1,41 @@
 import { SettingsType } from "../Types/SettingsType";
 
 export let Settings: SettingsType = {
+    "open_fountain": {
+        "type": "boolean",
+        "display": "Open Fountain"
+    },
     "shuffle_kokiri_sword": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Kokiri Sword"
     },
     "shuffle_ocarinas": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Ocarinas"
     },
     "shuffle_weird_egg": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Weird Egg"
     },
     "shuffle_gerudo_card": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Gerudo Card"
     },
     "shuffle_song_items": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Songs"
     },
     "shuffle_cows": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Cows"
     },
     "shuffle_beans": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Shuffle Beans"
     },
     "shuffle_scrubs": {
         "type": "select",
+        "display": "Scrubsanity",
         "options": [
             "off",
             "low",
@@ -33,6 +45,7 @@ export let Settings: SettingsType = {
     },
     "shopsanity": {
         "type": "select",
+        "display": "Shopsanity",
         "options": [
             "off",
             "0",
@@ -45,6 +58,7 @@ export let Settings: SettingsType = {
     },
     "tokensanity": {
         "type": "select",
+        "display": "Tokensanity",
         "options": [
             "off",
             "dungeons",
@@ -54,6 +68,7 @@ export let Settings: SettingsType = {
     },
     "shuffle_mapcompass": {
         "type": "select",
+        "display": "Shuffle Maps/Compasses",
         "options": [
             "remove",
             "startwith",
@@ -64,6 +79,7 @@ export let Settings: SettingsType = {
     },
     "shuffle_smallkeys": {
         "type": "select",
+        "display": "Shuffle Small Keys",
         "options": [
             "remove",
             "vanilla",
@@ -73,6 +89,7 @@ export let Settings: SettingsType = {
     },
     "shuffle_bosskeys": {
         "type": "select",
+        "display": "Shuffle Boss Keys",
         "options": [
             "remove",
             "vanilla",
@@ -82,6 +99,7 @@ export let Settings: SettingsType = {
     },
     "shuffle_ganon_bosskey": {
         "type": "select",
+        "display": "Shuffle Ganons Boss Key",
         "options": [
             "remove",
             "vanilla",
@@ -94,13 +112,16 @@ export let Settings: SettingsType = {
         ]
     },
     "correct_chest_sizes": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Chest Size Match Contents"
     },
     "clearer_hints": {
-        "type": "boolean"
+        "type": "boolean",
+        "display": "Clearer Hints",
     },
     "hints": {
         "type": "select",
+        "display": "Hints Require",
         "options": [
             "none",
             "mask",
@@ -110,6 +131,7 @@ export let Settings: SettingsType = {
     },
     "hint_dist": {
         "type": "select",
+        "display": "Hint Distribution",
         "options": [
             "useless",
             "balanced",
@@ -120,6 +142,7 @@ export let Settings: SettingsType = {
     },
     "item_pool_value": {
         "type": "select",
+        "display": "Item Pool Distribution",
         "options": [
             "plentiful",
             "balanced",
@@ -129,6 +152,7 @@ export let Settings: SettingsType = {
     },
     "damage_multiplier": {
         "type": "select",
+        "display": "Damage Multiplier",
         "options": [
             "half",
             "normal",
@@ -139,6 +163,7 @@ export let Settings: SettingsType = {
     },
     "starting_tod": {
         "type": "select",
+        "display": "Starting Time of Day",
         "options": [
             "default",
             "random",
@@ -154,6 +179,7 @@ export let Settings: SettingsType = {
     },
     "starting_age": {
         "type": "select",
+        "display": "Starting Age",
         "options": [
             "child",
             "adult",

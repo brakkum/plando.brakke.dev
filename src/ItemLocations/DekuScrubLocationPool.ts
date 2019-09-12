@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let DekuScrubLocationPool: LocationPool = [
+export let DekuScrubLocationPool: LocationPoolType = [
     "LW Deku Scrub Deku Nuts",
     "LW Deku Scrub Deku Sticks",
     "LW Grotto Deku Scrub Arrows",

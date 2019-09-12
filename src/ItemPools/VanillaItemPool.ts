@@ -1,6 +1,6 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let VanillaItemPool: ItemPool = [
+export let VanillaItemPool: ItemPoolType = [
     "Arrows (10)",
     "Arrows (30)",
     "Arrows (5)",

@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let OcarinaLocationPool: LocationPool = [
+export let OcarinaLocationPool: LocationPoolType = [
     "Gift from Saria",
     "Ocarina of Time"
 ];

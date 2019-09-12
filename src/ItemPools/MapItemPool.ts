@@ -1,6 +1,6 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let MapItemPool: ItemPool = [
+export let MapItemPool: ItemPoolType = [
     "Map (Bottom of the Well)",
     "Map (Deku Tree)",
     "Map (Dodongos Cavern)",

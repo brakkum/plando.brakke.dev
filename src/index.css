@@ -1,13 +1,69 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+/* .plando-generator {
+
+} */
+
+/* .plando-settings {
+
+} */
+
+.plando-settings {
+    padding-bottom: 0;
+}
+
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.setting {
+    display: flex;
+    margin: 5px auto;
+    height: 30px;
+    width: 350px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting .column {
+    height: 30px;
+}
+
+.setting-select {
+
+}
+
+.setting .enabled,
+.location .enabled {
+    color: black;
+}
+
+.setting .disabled,
+.location .disabled {
+    color: grey;
+}
+
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.location {
+    margin: 5px auto;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
 }

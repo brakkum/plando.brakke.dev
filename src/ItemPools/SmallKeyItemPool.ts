@@ -1,6 +1,6 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let SmallKeyItemPool: ItemPool = [
+export let SmallKeyItemPool: ItemPoolType = [
     "Small Key (Bottom of the Well)",
     "Small Key (Fire Temple)",
     "Small Key (Forest Temple)",

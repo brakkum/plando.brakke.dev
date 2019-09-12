@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let ShopLocationPool: LocationPool = [
+export let ShopLocationPool: LocationPoolType = [
     "Kokiri Shop Item 1",
     "Kokiri Shop Item 2",
     "Kokiri Shop Item 3",

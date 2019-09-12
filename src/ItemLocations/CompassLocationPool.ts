@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let CompassLocationPool: LocationPool = [
+export let CompassLocationPool: LocationPoolType = [
     "Bottom of the Well Center Large Chest",
     "Deku Tree Compass Chest",
     "Dodongos Cavern Compass Chest",

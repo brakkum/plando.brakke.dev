@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let WeirdEggItemPool: ItemPool = [
+export let WeirdEggItemPool: ItemPoolType = [
     "Weird Egg"
 ];

@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import PlandoGenerator from './PlandoGenerator';
 import * as serviceWorker from './serviceWorker';
+import PlandoGenerator from './PlandoGenerator';
+import ReactDOM from 'react-dom';
+import "bulma/css/bulma.css"
+import React from 'react';
+import './index.css';
 
 ReactDOM.render(<PlandoGenerator />, document.getElementById('root'));
 

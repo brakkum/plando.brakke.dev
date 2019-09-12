@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let GoldSkulltulaDungeonLocationPool: LocationPool = [
+export let GoldSkulltulaDungeonLocationPool: LocationPoolType = [
     "GS Deku Tree Compass Room",
     "GS Deku Tree Basement Vines",
     "GS Deku Tree Basement Gate",

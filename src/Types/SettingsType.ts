@@ -1,6 +1,6 @@
-import { SelectOption } from "../Types/SelectOption";
-import { BooleanOption } from "../Types/BooleanOption";
+import { SelectOptionType } from "./SelectOptionType";
+import { BooleanOptionType } from "./BooleanOptionType";
 
 export type SettingsType = {
-    [setting: string]: SelectOption | BooleanOption
+    [setting: string]: SelectOptionType | BooleanOptionType
 };

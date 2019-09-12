@@ -1,5 +1,5 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let MagicBeanLocationPool: LocationPool = [
+export let MagicBeanLocationPool: LocationPoolType = [
     "Magic Bean Salesman"
 ];

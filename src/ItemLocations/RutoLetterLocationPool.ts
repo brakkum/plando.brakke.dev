@@ -1,5 +1,5 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let RutoLetterLocationPool: LocationPool = [
+export let RutoLetterLocationPool: LocationPoolType = [
     "Underwater Bottle"
 ];

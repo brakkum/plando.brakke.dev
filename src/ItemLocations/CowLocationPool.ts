@@ -1,6 +1,6 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let CowLocationPool: LocationPool = [
+export let CowLocationPool: LocationPoolType = [
     "Links House Cow",
     "Gerudo Valley Cow",
     "Impas House Cow",

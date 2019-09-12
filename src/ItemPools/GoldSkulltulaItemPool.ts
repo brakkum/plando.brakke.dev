@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let GoldSkulltulaItemPool: ItemPool = [
+export let GoldSkulltulaItemPool: ItemPoolType = [
     "Gold Skulltula Token"
 ];

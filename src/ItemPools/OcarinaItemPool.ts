@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let OcarinaItemPool: ItemPool = [
+export let OcarinaItemPool: ItemPoolType = [
     "Ocarina"
 ];

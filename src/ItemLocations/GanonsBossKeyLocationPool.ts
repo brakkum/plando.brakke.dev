@@ -1,5 +1,5 @@
-import { LocationPool } from "../Types/LocationPool";
+import { LocationPoolType } from "../Types/LocationPoolType";
 
-export let GanonsBossKeyLocationPool: LocationPool = [
+export let GanonsBossKeyLocationPool: LocationPoolType = [
     "Ganons Tower Boss Key Chest"
 ];

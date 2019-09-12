@@ -1,5 +1,5 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let SwordItemPool: ItemPool = [
+export let SwordItemPool: ItemPoolType = [
     "Kokiri Sword"
 ];

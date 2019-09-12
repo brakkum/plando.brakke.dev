@@ -1,6 +1,6 @@
-import { ItemPool } from "../Types/ItemPool";
+import { ItemPoolType } from "../Types/ItemPoolType";
 
-export let SongItemPool: ItemPool = [
+export let SongItemPool: ItemPoolType = [
     "Bolero of Fire",
     "Eponas Song",
     "Minuet of Forest",
