@@ -4,3 +4,5 @@ node_modules
 Oot_*.json
 test.json
 pool_bkup.json
+build
+
