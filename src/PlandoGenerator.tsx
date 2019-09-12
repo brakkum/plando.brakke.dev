@@ -302,8 +302,6 @@ function PlandoGenerator() {
 
             {/* locations that are open based on settings */}
             <div className="plando-locations section">
-                <h3 className="is-size-3">Locations</h3>
-                <h4 className="is-size-4">Click locations to enable/disable</h4>
                 {/* cows */}
                 <LocationPoolDisplay
                     name={"Cow Locations"}
