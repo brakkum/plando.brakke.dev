@@ -26,7 +26,10 @@ function LocationPoolDisplay({
                         </h5>
                         {locationIsEnabled && <div className="">
                             <div className="select is-small setting-select">
-                                <select onChange={e => updateLocation(location, e.target.value)} defaultValue={locations[name]}>
+                                <select
+                                    onChange={e => updateLocation(location, e.target.value)}
+                                    defaultValue={locations[name]}
+                                >
                                     {items.map((item, j) => {
                                         return <option key={j} value={item}>
                                             {item}

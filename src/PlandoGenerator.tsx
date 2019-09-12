@@ -1,4 +1,5 @@
 import { SelectOptionType } from "./Types/SelectOptionType";
+import OverworldPoolDisplay from "./OverworldPoolDisplay";
 import LocationPoolDisplay from "./LocationPoolDisplay";
 import { Settings } from "./Settings/Settings";
 import React, { useState } from "react";
@@ -42,11 +43,21 @@ import { WeirdEggItemPool } from "./ItemPools/WeirdEggItemPool";
 // dungeon rewards
 import { DungeonRewardLocationPool } from "./DungeonRewards/DungeonRewardLocationPool";
 import { DungeonRewardItemPool } from "./DungeonRewards/DungeonRewardItemPool";
+// entrances
+import { DungeonEntrances } from "./Entrances/DungeonEntrances";
+import { DungeonInteriors } from "./Entrances/DungeonInteriors";
+import { NonSimpleEntrances } from "./Entrances/NonSimpleEntrances";
+import { NonSimpleInteriors } from "./Entrances/NonSimpleInteriors";
+import { OverworldEntrances } from "./Entrances/OverworldEntrances";
+import { SimpleEntrances } from "./Entrances/SimpleEntrances";
+import { SimpleInteriors } from "./Entrances/SimpleInteriors";
 
 function PlandoGenerator() {
 
     const [settings, setSettings]: [{[s: string]: boolean | string }, Function] = useState({});
     const [locations, setLocations]: [{[l: string]: string}, Function] = useState({});
+    const [entrances, setEntrances]: [{[e: string]: string}, Function] = useState({});
+    const [overworldEntrances, setOverworldEntrances]: [{[e: string]: object}, Function] = useState({});
 
     // functions
     const toggleSettingEnabled = (name: string): void => {
@@ -85,8 +96,33 @@ function PlandoGenerator() {
         setLocations({..._locations});
     };
 
+    const toggleEntranceEnabled = (entrance: string) => {
+        let _entrances = entrances;
+        _entrances[entrance] !== undefined ? delete _entrances[entrance] : _entrances[entrance] = SimpleEntrances[0];
+        setEntrances({..._entrances});
+    };
+
+    const updateEntrance = (entrance: string, value: string) => {
+        let _entrances = entrances;
+        _entrances[entrance] = value;
+        setLocations({..._entrances});
+    };
+
+    const toggleOverworldEntranceEnabled = (entrance: string) => {
+        let _overworldEntrances = overworldEntrances;
+        let defaultOw = {"region": OverworldEntrances[0].split(" -> ")[0], "from": OverworldEntrances[0].split(" -> ")[1]};
+        _overworldEntrances[entrance] !== undefined ? delete _overworldEntrances[entrance] : _overworldEntrances[entrance] = defaultOw;
+        setOverworldEntrances({..._overworldEntrances});
+    };
+
+    const updateOverworldEntrance = (entrance: string, objString: string) => {
+        let _overworldEntrances = overworldEntrances;
+        _overworldEntrances[entrance] = JSON.parse(objString);
+        setOverworldEntrances({..._overworldEntrances});
+    };
+
     const saveJSONFile = () => {
-        let contents = {
+        let contents: any = {
             "settings": {
                 ...settings
             },
@@ -94,6 +130,12 @@ function PlandoGenerator() {
                 ...locations
             }
         };
+        if (settings.entrance_shuffle !== undefined && settings.entrance_shuffle !== "off") {
+            contents["entrances"] = {
+                ...entrances,
+                ...overworldEntrances
+            }
+        }
         let blob = new Blob([JSON.stringify(contents, null, 4)], {type: "application/json"});
         FileSaver.saveAs(blob, `plando-${Date.now()}.json`);
     };
@@ -110,6 +152,11 @@ function PlandoGenerator() {
     let dungeonItems: string[] = [...VanillaItemPool];
     let songItems: string[] = [];
     let gsItems: string[] = [];
+
+    // entrances
+    let availableOverworldEntrances = [];
+    let availableEntrances = [];
+    let availableInteriors = [];
 
     // populate options
     if (!settings.open_fountain) {
@@ -226,6 +273,25 @@ function PlandoGenerator() {
         songItems.push(...SongItemPool);
     }
 
+    if (settings.entrance_shuffle) {
+        // check to add dungeons
+        if (["dungeons", "simple-indoors", "all-indoors", "all"].includes(settings.entrance_shuffle.toString())) {
+            availableEntrances.push(...DungeonEntrances);
+            availableInteriors.push(...DungeonInteriors);
+        }
+        if (["simple-indoors", "all-indoors", "all"].includes(settings.entrance_shuffle.toString())) {
+            availableEntrances.push(...SimpleEntrances);
+            availableInteriors.push(...SimpleInteriors);
+        }
+        if (["all-indoors", "all"].includes(settings.entrance_shuffle.toString())) {
+            availableEntrances.push(...NonSimpleEntrances);
+            availableInteriors.push(...NonSimpleInteriors);
+        }
+        if (settings.entrance_shuffle.toString() === "all") {
+            availableOverworldEntrances.push(...OverworldEntrances);
+        }
+    }
+
     // map over location keys to check for removed locations
     let updated = false;
     let _locations = {...locations};
@@ -246,6 +312,36 @@ function PlandoGenerator() {
     });
     if (updated) {
         setLocations({..._locations});
+    }
+    updated = false;
+    // check for change in entrances
+    let _entrances = {...entrances};
+    possibleLocations = [
+        ...availableEntrances
+    ];
+    Object.keys(_entrances).forEach(entrance => {
+        if (!possibleLocations.includes(entrance)) {
+            delete _entrances[entrance];
+            updated = true;
+        }
+    });
+    if (updated) {
+        setEntrances({..._entrances});
+    }
+    updated = false;
+    // check for change in overworld entrances
+    let _owEntrances = {...overworldEntrances};
+    possibleLocations = [
+        ...availableOverworldEntrances
+    ];
+    Object.keys(_owEntrances).forEach(entrance => {
+        if (!possibleLocations.includes(entrance)) {
+            delete _owEntrances[entrance];
+            updated = true;
+        }
+    });
+    if (updated) {
+        setOverworldEntrances({..._owEntrances});
     }
 
     return (
@@ -318,6 +414,23 @@ function PlandoGenerator() {
                     locations={locations}
                     toggleLocationEnabled={toggleDungeonRewardEnabled}
                     updateLocation={updateLocation}
+                />
+                {/* entrances */}
+                <LocationPoolDisplay
+                    name={"House/Grotto/Dungeon Entrances"}
+                    availableLocations={availableEntrances}
+                    items={availableInteriors.sort()}
+                    locations={entrances}
+                    toggleLocationEnabled={toggleEntranceEnabled}
+                    updateLocation={updateEntrance}
+                />
+                {/* overworld entrances */}
+                <OverworldPoolDisplay
+                    name={"Overworld Entrances"}
+                    availableEntrances={availableOverworldEntrances}
+                    overworldEntrances={overworldEntrances}
+                    toggleOverworldEntranceEnabled={toggleOverworldEntranceEnabled}
+                    updateOverworldEntrance={updateOverworldEntrance}
                 />
                 {/* overworld */}
                 <LocationPoolDisplay

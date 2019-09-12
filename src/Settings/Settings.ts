@@ -43,6 +43,17 @@ export let Settings: SettingsType = {
             "random"
         ]
     },
+    "entrance_shuffle": {
+        "type": "select",
+        "display": "Entrance Shuffle",
+        "options": [
+            "off",
+            "dungeons",
+            "simple-indoors",
+            "all-indoors",
+            "all"
+        ]
+    },
     "shopsanity": {
         "type": "select",
         "display": "Shopsanity",
