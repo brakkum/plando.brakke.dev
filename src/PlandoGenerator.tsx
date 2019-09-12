@@ -281,9 +281,12 @@ function PlandoGenerator() {
         <div className="plando-generator">
             {/* top bar for outputting plando file */}
             <nav className="navbar is-dark is-fixed-top">
-                <div className="navbar-brand  is-pulled-right">
+                <div className="navbar-brand is-pulled-right">
                     <a href="#download" className="navbar-item is-button" onClick={saveJSONFile}>
                         Download Plando
+                    </a>
+                    <a href="https://github.com/brakkum/plando.brakke.dev" className="navbar-item is-button">
+                        GitHub
                     </a>
                 </div>
             </nav>
