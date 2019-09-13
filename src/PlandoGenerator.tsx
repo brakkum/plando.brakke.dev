@@ -1,6 +1,7 @@
 import { SelectOptionType } from "./Types/SelectOptionType";
 import OverworldPoolDisplay from "./OverworldPoolDisplay";
 import LocationPoolDisplay from "./LocationPoolDisplay";
+import { ItemPoolType } from "./Types/ItemPoolType";
 import { Settings } from "./Settings/Settings";
 import React, { useState } from "react";
 import FileSaver from "file-saver";
@@ -52,12 +53,26 @@ import { OverworldEntrances } from "./Entrances/OverworldEntrances";
 import { SimpleEntrances } from "./Entrances/SimpleEntrances";
 import { SimpleInteriors } from "./Entrances/SimpleInteriors";
 
+let StartingItemPool: ItemPoolType = [
+    ...DungeonRewardItemPool,
+    ...GerudoCardItemPool,
+    ...GoldSkulltulaItemPool,
+    ...MagicBeanItemPool,
+    ...OcarinaItemPool,
+    ...RutoLetterItemPool,
+    ...SongItemPool,
+    ...SwordItemPool,
+    ...VanillaItemPool,
+    ...WeirdEggItemPool
+].sort();
+
 function PlandoGenerator() {
 
     const [settings, setSettings]: [{[s: string]: boolean | string }, Function] = useState({});
     const [locations, setLocations]: [{[l: string]: string}, Function] = useState({});
     const [entrances, setEntrances]: [{[e: string]: string}, Function] = useState({});
     const [overworldEntrances, setOverworldEntrances]: [{[e: string]: object}, Function] = useState({});
+    const [startingItems, setStartingItems]: [{[i: string]: number}, Function] = useState({});
 
     // functions
     const toggleSettingEnabled = (name: string): void => {
@@ -121,6 +136,41 @@ function PlandoGenerator() {
         setOverworldEntrances({..._overworldEntrances});
     };
 
+    const addStartingItem = () => {
+        let _startingItems = startingItems;
+        let item;
+        for (let i = 0; i < StartingItemPool.length; i++) {
+            item = StartingItemPool[i];
+            if (startingItems[item] !== undefined) {
+                continue;
+            }
+            break;
+        };
+        if (!item) return;
+        _startingItems[item] = 1;
+        setStartingItems({..._startingItems});
+    };
+
+    const updateStartingItem = (oldItem: string, newItem: string) => {
+        let _startingItems = startingItems;
+        let val = _startingItems[oldItem];
+        delete _startingItems[oldItem];
+        _startingItems[newItem] = val;
+        setStartingItems({..._startingItems});
+    };
+
+    const updateStartingItemCount = (item: string, count: string) => {
+        let _startingItems = startingItems;
+        _startingItems[item] = parseInt(count);
+        setStartingItems({...startingItems});
+    };
+
+    const removeStartingItem = (item: string) => {
+        let _startingItems = startingItems;
+        delete _startingItems[item];
+        setStartingItems({...startingItems});
+    };
+
     const saveJSONFile = () => {
         let contents: any = {
             "settings": {
@@ -134,7 +184,12 @@ function PlandoGenerator() {
             contents["entrances"] = {
                 ...entrances,
                 ...overworldEntrances
-            }
+            };
+        }
+        if (Object.keys(startingItems).length > 0) {
+            contents["starting_items"] = {
+                ...startingItems
+            };
         }
         let blob = new Blob([JSON.stringify(contents, null, 4)], {type: "application/json"});
         FileSaver.saveAs(blob, `plando-${Date.now()}.json`);
@@ -385,7 +440,36 @@ function PlandoGenerator() {
                     })}
                 </div>
             </div>
+            {/* starting items */}
+            <div className="starting-items section">
+                <h3 className="is-size-3">Starting Items</h3>
+                <button className="button add-starting-item" onClick={addStartingItem}>
+                    Add
+                </button>
+                {Object.keys(startingItems).sort().map((item, i) => {
+                    return <div key={i} className="starting-item">
+                        <select className="input start-input" onChange={e => updateStartingItem(item, e.target.value)} defaultValue={item}>
+                            <option>
+                                {item}
+                            </option>
+                            {StartingItemPool.map((sItem, j) => {
+                                if (Object.keys(startingItems).includes(sItem) ) {
+                                    return null;
+                                }
+                                return <option key={j} value={sItem}>
+                                    {sItem}
+                                </option>
+                            })}
+                        </select>
+                        <input className="input start-input" type="number" min="1" value={startingItems[item]} onChange={e => updateStartingItemCount(item, e.target.value)}>
 
+                        </input>
+                        <div>
+                            <button className="button start-input" onClick={() => removeStartingItem(item)}>Remove</button>
+                        </div>
+                    </div>
+                })}
+            </div>
             {/* locations that are open based on settings */}
             <div className="plando-locations section">
                 {/* cows */}

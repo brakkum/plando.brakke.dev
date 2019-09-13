@@ -67,3 +67,12 @@ code {
     justify-content: space-between;
     align-items: center;
 }
+
+.starting-items {
+    padding-bottom: 0;
+}
+
+.start-input {
+    width: 40%;
+    margin: 5px;
+}
