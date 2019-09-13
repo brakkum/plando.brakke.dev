@@ -6,8 +6,8 @@ function LocationPoolDisplay({
     availableLocations,
     locations,
     items,
-    toggleLocationEnabled,
-    updateLocation
+    toggleLocationFunction,
+    updateLocationFunction
 }: LocationPoolDisplayProps) {
 
     return (
@@ -19,7 +19,7 @@ function LocationPoolDisplay({
                     let locationIsEnabled = locations[location] !== undefined;
                     return <div key={i} className="location">
                         <h5
-                            onClick={() => toggleLocationEnabled(location)}
+                            onClick={() => toggleLocationFunction(location)}
                             className={(locationIsEnabled ? "enabled" : "disabled")}
                         >
                             {location}
@@ -27,7 +27,7 @@ function LocationPoolDisplay({
                         {locationIsEnabled && <div className="">
                             <div className="select is-small setting-select">
                                 <select
-                                    onChange={e => updateLocation(location, e.target.value)}
+                                    onChange={e => updateLocationFunction(location, e.target.value)}
                                     defaultValue={locations[name]}
                                 >
                                     {items.map((item, j) => {

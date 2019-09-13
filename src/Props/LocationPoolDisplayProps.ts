@@ -4,6 +4,6 @@ export type LocationPoolDisplayProps = {
     availableLocations: string[],
     locations: {[s: string]: string},
     items: string[],
-    toggleLocationEnabled: Function,
-    updateLocation: Function
+    toggleLocationFunction: Function,
+    updateLocationFunction: Function
 };

@@ -125,6 +125,12 @@ function PlandoGenerator() {
         setOverworldEntrances({..._overworldEntrances});
     };
 
+    const toggleSongEnabled = (song: string) => {
+        let _locations = locations;
+        _locations[song] !== undefined ? delete _locations[song] : _locations[song] = SongItemPool[0];
+        setLocations({..._locations});
+    };
+
     const addStartingItem = () => {
         let _startingItems = startingItems;
         let item;
@@ -467,8 +473,8 @@ function PlandoGenerator() {
                     availableLocations={settings.shuffle_cows ? CowLocationPool : []}
                     items={overworldItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* dungeons */}
                 <LocationPoolDisplay
@@ -476,8 +482,8 @@ function PlandoGenerator() {
                     availableLocations={dungeonLocations}
                     items={dungeonItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* dungeon rewards */}
                 <LocationPoolDisplay
@@ -485,8 +491,8 @@ function PlandoGenerator() {
                     availableLocations={DungeonRewardLocationPool}
                     items={DungeonRewardItemPool.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleDungeonRewardEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleDungeonRewardEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* entrances */}
                 <LocationPoolDisplay
@@ -494,8 +500,8 @@ function PlandoGenerator() {
                     availableLocations={availableEntrances}
                     items={availableInteriors.sort()}
                     locations={entrances}
-                    toggleLocationEnabled={toggleEntranceEnabled}
-                    updateLocation={updateEntrance}
+                    toggleLocationFunction={toggleEntranceEnabled}
+                    updateLocationFunction={updateEntrance}
                 />
                 {/* overworld entrances */}
                 <OverworldPoolDisplay
@@ -511,8 +517,8 @@ function PlandoGenerator() {
                     availableLocations={overworldLocations}
                     items={overworldItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* scrubs */}
                 <LocationPoolDisplay
@@ -520,8 +526,8 @@ function PlandoGenerator() {
                     availableLocations={dekuScrubLocations}
                     items={overworldItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* shops */}
                 <LocationPoolDisplay
@@ -529,8 +535,8 @@ function PlandoGenerator() {
                     availableLocations={shopLocations}
                     items={overworldItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* skulltulas */}
                 <LocationPoolDisplay
@@ -538,8 +544,8 @@ function PlandoGenerator() {
                     availableLocations={gsLocations}
                     items={gsItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleLocationEnabled}
+                    updateLocationFunction={updateLocation}
                 />
                 {/* songs */}
                 <LocationPoolDisplay
@@ -547,8 +553,8 @@ function PlandoGenerator() {
                     availableLocations={SongLocationPool}
                     items={songItems.sort()}
                     locations={locations}
-                    toggleLocationEnabled={toggleLocationEnabled}
-                    updateLocation={updateLocation}
+                    toggleLocationFunction={toggleSongEnabled}
+                    updateLocationFunction={updateLocation}
                 />
             </div>
         </div>
