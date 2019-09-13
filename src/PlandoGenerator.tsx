@@ -1,7 +1,7 @@
+import { StartingItemPool } from "./ItemPools/StartingItemPool";
 import { SelectOptionType } from "./Types/SelectOptionType";
 import OverworldPoolDisplay from "./OverworldPoolDisplay";
 import LocationPoolDisplay from "./LocationPoolDisplay";
-import { ItemPoolType } from "./Types/ItemPoolType";
 import { Settings } from "./Settings/Settings";
 import React, { useState } from "react";
 import FileSaver from "file-saver";
@@ -53,18 +53,7 @@ import { OverworldEntrances } from "./Entrances/OverworldEntrances";
 import { SimpleEntrances } from "./Entrances/SimpleEntrances";
 import { SimpleInteriors } from "./Entrances/SimpleInteriors";
 
-let StartingItemPool: ItemPoolType = [
-    ...DungeonRewardItemPool,
-    ...GerudoCardItemPool,
-    ...GoldSkulltulaItemPool,
-    ...MagicBeanItemPool,
-    ...OcarinaItemPool,
-    ...RutoLetterItemPool,
-    ...SongItemPool,
-    ...SwordItemPool,
-    ...VanillaItemPool,
-    ...WeirdEggItemPool
-].sort();
+
 
 function PlandoGenerator() {
 
@@ -79,7 +68,7 @@ function PlandoGenerator() {
         let _settings = settings;
         let defaultValue;
         if ((Settings[name] as SelectOptionType).options !== undefined) {
-              defaultValue = (Settings[name] as SelectOptionType).options[0];
+            defaultValue = (Settings[name] as SelectOptionType).options[0];
         } else {
             defaultValue = false;
         }
