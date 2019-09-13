@@ -74,6 +74,7 @@ export let StartingItemPool: ItemPoolType = [
     "Progressive Hookshot",
     "Progressive Scale",
     "Progressive Strength Upgrade",
+    "Progressive Wallet",
     "Rupees",
     "Slingshot",
     "Stone of Agony",
