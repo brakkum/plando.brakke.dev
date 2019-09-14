@@ -1,4 +1,5 @@
 import { OverworldPoolDisplayProps } from "./Props/OverworldPoolDisplayProps";
+import { Entrances } from "./Entrances/Entrances";
 import React from "react";
 
 function OverworldPoolDisplay({
@@ -10,9 +11,9 @@ function OverworldPoolDisplay({
 }: OverworldPoolDisplayProps) {
 
     let entranceObjects: object[] = [];
-    availableEntrances.forEach(entrance => {
-        let arr = entrance.split(" -> ");
-        entranceObjects.push({"region": arr[0], "from": arr[1]});
+    Entrances.forEach(entrance => {
+        let [region, from] = entrance.split(" -> ");
+        entranceObjects.push({"region": region, "from": from});
     });
 
     return (
@@ -36,8 +37,10 @@ function OverworldPoolDisplay({
                                 defaultValue={entrance}
                             >
                                 {entranceObjects.map((obj: any, j) => {
+                                    let region = obj.region;
+                                    let from = obj.from;
                                     return <option key={j} value={JSON.stringify(obj)}>
-                                        {`${obj.region} -> ${obj.from}`}
+                                        {`${region} -> ${from}`}
                                     </option>
                                 })}
                             </select>
