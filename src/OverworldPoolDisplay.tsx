@@ -23,6 +23,7 @@ function OverworldPoolDisplay({
             {availableEntrances.length > 0 ?
             availableEntrances.sort().map((entrance, i) => {
                 let entranceIsEnabled = overworldEntrances[entrance] !== undefined;
+                let eObj: any = overworldEntrances[entrance];
                 return <div key={i} className="location">
                     <h5
                         onClick={() => toggleOverworldEntranceEnabled(entrance)}
@@ -34,7 +35,7 @@ function OverworldPoolDisplay({
                         <div className="select is-small setting-select">
                             <select
                                 onChange={e => updateOverworldEntrance(entrance, e.target.value)}
-                                defaultValue={entrance}
+                                defaultValue={JSON.stringify(eObj)}
                             >
                                 {entranceObjects.map((obj: any, j) => {
                                     let region = obj.region;

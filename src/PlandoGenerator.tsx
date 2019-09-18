@@ -2,10 +2,10 @@ import { StartingItemPool } from "./ItemPools/StartingItemPool";
 import { SelectOptionType } from "./Types/SelectOptionType";
 import OverworldPoolDisplay from "./OverworldPoolDisplay";
 import LocationPoolDisplay from "./LocationPoolDisplay";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 import { Settings } from "./Settings/Settings";
-import React, { useState } from "react";
 import FileSaver from "file-saver";
-import "./PlandoGenerator.css";
+import React from "react";
 // location pools
 import { BossKeyLocationPool } from "./ItemLocations/BossKeyLocationPool";
 import { CompassLocationPool } from "./ItemLocations/CompassLocationPool";
@@ -57,11 +57,12 @@ import { SimpleInteriors } from "./Entrances/SimpleInteriors";
 
 function PlandoGenerator() {
 
-    const [settings, setSettings]: [{[s: string]: boolean | string }, Function] = useState({});
-    const [locations, setLocations]: [{[l: string]: string}, Function] = useState({});
-    const [entrances, setEntrances]: [{[e: string]: string}, Function] = useState({});
-    const [overworldEntrances, setOverworldEntrances]: [{[e: string]: object}, Function] = useState({});
-    const [startingItems, setStartingItems]: [{[i: string]: number}, Function] = useState({});
+    const [settings, setSettings]: any[] = useLocalStorage("settings", {});
+    const [locations, setLocations]: any[] = useLocalStorage("locations", {});
+    const [entrances, setEntrances]: any[] = useLocalStorage("entrances", {});
+    const [overworldEntrances, setOverworldEntrances]: any[] = useLocalStorage("overworldEntrances", {});
+    const [startingItems, setStartingItems]: any[] = useLocalStorage("startingItems", {});
+    const [selectedStartingItem, setSelectedStartingItem]: any[] = useLocalStorage("selectedStartingItem", StartingItemPool[0]);
 
     // functions
     const toggleSettingEnabled = (name: string): void => {
@@ -109,7 +110,7 @@ function PlandoGenerator() {
     const updateEntrance = (entrance: string, value: string) => {
         let _entrances = entrances;
         _entrances[entrance] = value;
-        setLocations({..._entrances});
+        setEntrances({..._entrances});
     };
 
     const toggleOverworldEntranceEnabled = (entrance: string) => {
@@ -132,25 +133,16 @@ function PlandoGenerator() {
     };
 
     const addStartingItem = () => {
+        if (!StartingItemPool.includes(selectedStartingItem)) return;
         let _startingItems = startingItems;
-        let item;
-        for (let i = 0; i < StartingItemPool.length; i++) {
-            item = StartingItemPool[i];
-            if (startingItems[item] !== undefined) {
+        _startingItems[selectedStartingItem] = 1;
+        for (let item of StartingItemPool) {
+            if (_startingItems[item] !== undefined) {
                 continue;
             }
+            setSelectedStartingItem(item);
             break;
-        };
-        if (!item) return;
-        _startingItems[item] = 1;
-        setStartingItems({..._startingItems});
-    };
-
-    const updateStartingItem = (oldItem: string, newItem: string) => {
-        let _startingItems = startingItems;
-        let val = _startingItems[oldItem];
-        delete _startingItems[oldItem];
-        _startingItems[newItem] = val;
+        }
         setStartingItems({..._startingItems});
     };
 
@@ -166,15 +158,26 @@ function PlandoGenerator() {
         setStartingItems({...startingItems});
     };
 
+    const resetPlando = () => {
+        if (!window.confirm("Are you sure? This will remove all data.")) {
+            return;
+        }
+        setSettings({});
+        setLocations({});
+        setEntrances({});
+        setOverworldEntrances({});
+        setStartingItems({});
+        setSelectedStartingItem(StartingItemPool[0]);
+    };
+
     const saveJSONFile = () => {
-        let contents: any = {
-            "settings": {
-                ...settings
-            },
-            "locations": {
-                ...locations
-            }
-        };
+        let contents: any = {};
+        if (Object.keys(settings).length > 0) {
+            contents["settings"] = {...settings};
+        }
+        if (Object.keys(locations).length > 0) {
+            contents["locations"] = {...locations};
+        }
         if (settings.entrance_shuffle !== undefined && settings.entrance_shuffle !== "off") {
             contents["entrances"] = {
                 ...entrances,
@@ -402,6 +405,9 @@ function PlandoGenerator() {
                     <a href="#download" className="navbar-item is-button" onClick={saveJSONFile}>
                         Download Plando
                     </a>
+                    <a href="#reset" onClick={resetPlando} className="navbar-item is-button">
+                        Reset
+                    </a>
                     <a href="https://github.com/brakkum/plando.brakke.dev" className="navbar-item is-button">
                         GitHub
                     </a>
@@ -438,30 +444,32 @@ function PlandoGenerator() {
             {/* starting items */}
             <div className="starting-items section">
                 <h3 className="is-size-3">Starting Items</h3>
-                <button className="button add-starting-item" onClick={addStartingItem}>
-                    Add
-                </button>
-                {Object.keys(startingItems).sort().map((item, i) => {
-                    return <div key={i} className="starting-item">
-                        <select className="input start-input" onChange={e => updateStartingItem(item, e.target.value)} defaultValue={item}>
-                            <option>
-                                {item}
-                            </option>
-                            {StartingItemPool.map((sItem, j) => {
-                                if (Object.keys(startingItems).includes(sItem) ) {
-                                    return null;
-                                }
-                                return <option key={j} value={sItem}>
-                                    {sItem}
-                                </option>
-                            })}
-                        </select>
-                        <input className="input start-input" type="number" min="1" value={startingItems[item]} onChange={e => updateStartingItemCount(item, e.target.value)}>
+                <div className="field">
+                    <select className="input control start-input" onChange={e => setSelectedStartingItem(e.target.value)} defaultValue={"Select Item"}>
+                    {StartingItemPool.map((item, i) => {
+                        if (startingItems[item] !== undefined) {
+                            return null;
+                        }
+                        return <option key={i} value={item}>
+                            {item}
+                        </option>
+                    })}
+                    </select>
+                    <button className="button control add-starting-item" onClick={addStartingItem}>
+                        Add
+                    </button>
+                </div>
+                {Object.keys(startingItems).map((item, i) => {
+                    return <div key={i} className="field has-addons starting-item">
+                        <p className="control">
+                            <input className="input" type="text" value={item} disabled={true} />
+                        </p>
+                        <input className="input control" type="number" min="1" value={startingItems[item]} onChange={e => updateStartingItemCount(item, e.target.value)}>
 
                         </input>
-                        <div>
-                            <button className="button start-input" onClick={() => removeStartingItem(item)}>Remove</button>
-                        </div>
+                        <p className="control">
+                            <button className="button control" onClick={() => removeStartingItem(item)}>Remove</button>
+                        </p>
                     </div>
                 })}
             </div>
